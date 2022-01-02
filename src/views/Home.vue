@@ -14,5 +14,13 @@ export default defineComponent({
   components: {
     HelloWorld,
   },
+  props: {
+    message: {
+      default: 'Hello World!'
+    }
+  },
+  setup(props) {
+    console.log(props.message)
+  }
 });
 </script>

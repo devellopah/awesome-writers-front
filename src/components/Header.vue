@@ -1,9 +1,9 @@
 <template>
   <header class="header-bar mb-3">
     <div class="container d-flex flex-column flex-md-row align-items-center p-3">
-      <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/"
-          class="text-white">OurApp</a></h4>
-
+      <h4 class="my-0 mr-md-auto font-weight-normal">
+        <a href="/" class="text-white">OurApp</a>
+      </h4>
       <div class="flex-row my-3 my-md-0" v-if="user">
         <a href="#" class="text-white mr-2 header-search-icon" title="Search"
           data-toggle="tooltip" data-placement="bottom"><i
@@ -14,11 +14,11 @@
         <a :href="'/users/{{ user.username }}'" class="mr-2"><img title="My Profile" data-toggle="tooltip"
             data-placement="bottom"
             style="width: 32px; height: 32px; border-radius: 16px;"
-            :src="'{{ user.avatar }}'"></a>
+            :src="user.avatar"></a>
         <a class="btn btn-sm btn-success mr-2" href="/posts/create">Create
           Post</a>
         <form action="/logout" method="POST" class="d-inline">
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <input type="hidden" name="_csrf" :value="csrfToken">
           <button class="btn btn-sm btn-secondary">Sign Out</button>
         </form>
       </div>
@@ -32,7 +32,7 @@
             <input name="password" class="form-control form-control-sm input-dark"
               type="password" placeholder="Password">
           </div>
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <input type="hidden" name="_csrf" :value="csrfToken">
           <div class="col-md-auto">
             <button class="btn btn-primary btn-sm">Sign In</button>
           </div>
@@ -57,8 +57,11 @@ export default defineComponent({
         avatar: 'https://i.pravatar.cc/100',
       },
     },
+    csrfToken: {
+      default: 'somevalue'
+    }
   },
-  setup(props) {
-  }
+  // setup(props) {
+  // }
 });
 </script>

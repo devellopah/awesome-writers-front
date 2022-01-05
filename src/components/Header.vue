@@ -11,10 +11,13 @@
         <span class="text-white mr-2 header-chat-icon" title="Chat"
           data-toggle="tooltip" data-placement="bottom"><i
             class="fas fa-comment"></i></span>
-        <a :href="'/users/{{ user.username }}'" class="mr-2"><img title="My Profile" data-toggle="tooltip"
-            data-placement="bottom"
-            style="width: 32px; height: 32px; border-radius: 16px;"
-            :src="user.avatar"></a>
+        <a :href="'/users/{{ user.username }}'" class="mr-2">
+        <img
+          title="My Profile" data-toggle="tooltip"
+          data-placement="bottom"
+          style="width: 32px; height: 32px; border-radius: 16px;"
+          :src="user.avatar"
+        ></a>
         <a class="btn btn-sm btn-success mr-2" href="/posts/create">Create
           Post</a>
         <form action="/logout" method="POST" class="d-inline">
@@ -44,7 +47,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+
+import { defineComponent, PropType } from "vue";
+
+interface User {
+  username: string,
+  avatar: string,
+}
 
 export default defineComponent({
   name: "Header",
@@ -56,12 +65,11 @@ export default defineComponent({
         username: 'John',
         avatar: 'https://i.pravatar.cc/100',
       },
+      type: Object as PropType<User>,
     },
     csrfToken: {
       default: 'somevalue'
     }
   },
-  // setup(props) {
-  // }
 });
 </script>

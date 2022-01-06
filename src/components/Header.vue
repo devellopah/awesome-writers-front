@@ -5,42 +5,55 @@
         <a href="/" class="text-white">OurApp</a>
       </h4>
       <div class="flex-row my-3 my-md-0" v-if="user">
-        <a href="#" class="text-white mr-2 header-search-icon" title="Search"
-          data-toggle="tooltip" data-placement="bottom"><i
-            class="fas fa-search"></i></a>
-        <span class="text-white mr-2 header-chat-icon" title="Chat"
-          data-toggle="tooltip" data-placement="bottom"><i
-            class="fas fa-comment"></i></span>
+        <a href="#" class="text-white mr-2 header-search-icon" title="Search" data-toggle="tooltip" data-placement="bottom">
+          <font-awesome-icon icon="fa-search" />
+        </a>
+        <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip" data-placement="bottom">
+          <font-awesome-icon icon="fa-comment" />
+        </span>
         <a :href="'/users/{{ user.username }}'" class="mr-2">
-        <img
-          title="My Profile" data-toggle="tooltip"
-          data-placement="bottom"
-          style="width: 32px; height: 32px; border-radius: 16px;"
-          :src="user.avatar"
-        ></a>
-        <a class="btn btn-sm btn-success mr-2" href="/posts/create">Create
-          Post</a>
+          <img
+            title="My Profile" data-toggle="tooltip"
+            data-placement="bottom"
+            style="width: 32px; height: 32px; border-radius: 16px;"
+            :src="user.avatar"
+          >
+        </a>
+        <b-button class="btn-success mr-2" variant="link" size="sm">Create Post</b-button>
         <form action="/logout" method="POST" class="d-inline">
           <input type="hidden" name="_csrf" :value="csrfToken">
-          <button class="btn btn-sm btn-secondary">Sign Out</button>
+          <b-button size="sm">Sign Out</b-button>
         </form>
       </div>
-      <form action="/login" method="POST" class="mb-0 pt-2 pt-md-0" v-else>
+      <b-form action="/login" method="POST" class="mb-0 pt-2 pt-md-0" v-else>
         <div class="row align-items-center">
           <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-            <input name="username" class="form-control form-control-sm input-dark"
-              type="text" placeholder="Username" autocomplete="off">
+            <b-form-input
+              name="username"
+              class="form-control form-control-sm input-dark"
+              type="text"
+              placeholder="Username"
+              autocomplete="off"
+            />
           </div>
           <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-            <input name="password" class="form-control form-control-sm input-dark"
-              type="password" placeholder="Password">
+            <b-form-input
+              name="password"
+              class="form-control form-control-sm input-dark"
+              type="password"
+              placeholder="Password"
+            />
           </div>
-          <input type="hidden" name="_csrf" :value="csrfToken">
+          <input
+            type="hidden"
+            name="_csrf"
+            :value="csrfToken"
+          />
           <div class="col-md-auto">
-            <button class="btn btn-primary btn-sm">Sign In</button>
+            <b-button variant="primary" size="sm">Sign In</b-button>
           </div>
         </div>
-      </form>
+      </b-form>
     </div>
   </header>
 
@@ -65,6 +78,7 @@ export default defineComponent({
         username: 'John',
         avatar: 'https://i.pravatar.cc/100',
       },
+      // default: null,
       type: Object as PropType<User>,
     },
     csrfToken: {

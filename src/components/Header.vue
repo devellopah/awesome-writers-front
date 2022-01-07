@@ -74,9 +74,11 @@ export default defineComponent({
   },
   props: {
     user: {
-      default: {
-        username: 'John',
-        avatar: 'https://i.pravatar.cc/100',
+      default() {
+        return {
+          username: 'John',
+          avatar: 'https://i.pravatar.cc/100',
+        }
       },
       // default: null,
       type: Object as PropType<User>,

@@ -6,10 +6,10 @@
       </h4>
       <div class="flex-row my-3 my-md-0" v-if="user">
         <a href="#" class="text-white mr-2 header-search-icon" title="Search" data-toggle="tooltip" data-placement="bottom">
-          <font-awesome-icon icon="fa-search" />
+          <font-awesome-icon icon="search" />
         </a>
         <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip" data-placement="bottom">
-          <font-awesome-icon icon="fa-comment" />
+          <font-awesome-icon icon="comment" />
         </span>
         <a :href="'/users/{{ user.username }}'" class="mr-2">
           <img

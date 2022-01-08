@@ -1,8 +1,5 @@
 <template>
   <Header />
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-  </div>
   <Footer />
 </template>
 
@@ -17,13 +14,5 @@ export default defineComponent({
     Header,
     Footer,
   },
-  props: {
-    message: {
-      default: 'Hello World!'
-    },
-  },
-  setup(props) {
-    console.log(props.message)
-  }
 });
 </script>

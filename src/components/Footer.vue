@@ -18,15 +18,5 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Footer",
-  props: {
-    user: {
-      default: {
-        username: 'John',
-        avatar: 'https://i.pravatar.cc/100',
-      },
-    },
-  },
-  setup(props) {
-  }
 });
 </script>

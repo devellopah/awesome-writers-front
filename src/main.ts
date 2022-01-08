@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import BootstrapVue3 from 'bootstrap-vue-3'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faComment } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -13,7 +13,7 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 
-library.add(faUserSecret)
+library.add(faSearch, faComment)
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)

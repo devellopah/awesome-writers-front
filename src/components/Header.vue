@@ -63,7 +63,7 @@
 
 import { defineComponent, PropType } from "vue";
 
-interface User {
+export interface User {
   username: string,
   avatar: string,
 }

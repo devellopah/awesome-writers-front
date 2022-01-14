@@ -78,9 +78,9 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue"
-import Header, { User } from '../Header.vue'
-import Footer from '../Footer.vue'
-import Flash from '../Flash.vue'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+import Flash from '@/components/Flash.vue'
 
 export default defineComponent({
   name: 'Guest',

@@ -62,11 +62,7 @@
 <script lang="ts">
 
 import { defineComponent, PropType } from "vue";
-
-export interface User {
-  username: string,
-  avatar: string,
-}
+import { UserType } from "@/types";
 
 export default defineComponent({
   name: "Header",
@@ -81,7 +77,7 @@ export default defineComponent({
         }
       },
       // default: null,
-      type: Object as PropType<User>,
+      type: Object as PropType<UserType>,
     },
     csrfToken: {
       default: 'somevalue'

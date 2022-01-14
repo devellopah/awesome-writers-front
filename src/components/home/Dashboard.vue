@@ -27,17 +27,11 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue"
-import Header, { User } from '../Header.vue'
-import Footer from '../Footer.vue'
-import Flash from '../Flash.vue'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+import Flash from '@/components/Flash.vue'
+import { UserType, PostType } from "@/types"
 
-interface Post {
-  _id: string,
-  title: string,
-  created_at: Date,
-  author: User,
-
-}
 export default defineComponent({
   name: "Dashboard",
   components: {
@@ -46,8 +40,8 @@ export default defineComponent({
     Flash,
   },
   props: {
-    user: Object as PropType<User>,
-    posts: Array as PropType<Array<Post>>
+    user: Object as PropType<UserType>,
+    posts: Array as PropType<Array<PostType>>
   },
 });
 </script>

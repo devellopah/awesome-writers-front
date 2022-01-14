@@ -1,8 +1,13 @@
 <template>
 <Header />
-  <div class="container py-md-5 container--narrow">
-    <Flash />
-    <b-form action="/posts" method="POST">
+
+<div class="container py-md-5 container--narrow">
+
+  <Flash />
+
+  <a class="small font-weight-bold" href="/posts/{{ post._id }}">&laquo; back to post</a>
+
+  <b-form class="mt-3" action="/posts/{{ post._id }}" method="POST">
       <b-form-group
         label="Title"
         label-class="text-muted mb-1"
@@ -17,6 +22,7 @@
           name="title"
           placeholder=""
           autocomplete="off"
+          :value="post!.title"
         />
       </b-form-group>
       <b-form-group
@@ -30,30 +36,33 @@
           required
           id="post-body"
           name="body"
+          :value="post!.body"
         />
       </b-form-group>
-      <input type="hidden" name="_csrf" :value="csrfToken">
-      <b-button
-        variant="primary"
-      >
-        Save New Post
-      </b-button>
-    </b-form>
-  </div>
+    <input type="hidden" name="_csrf" :value="csrfToken">
+    <b-button
+      variant="primary"
+    >
+      Save Updated Post
+    </b-button>
+  </b-form>
+</div>
+
 <Footer />
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent, PropType } from "vue"
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import Flash from '@/components/Flash.vue'
+import { PostType } from "@/types"
 
 export default defineComponent({
-  name: 'CreatePost',
+  name: 'EditPost',
   props: {
     csrfToken: String,
-
+    post: Object as PropType<PostType>
   },
   components: {
     Header,

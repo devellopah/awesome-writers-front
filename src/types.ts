@@ -9,4 +9,5 @@ export interface PostType {
   body: string,
   created_at: Date,
   author: UserType,
+  isOwner: boolean,
 }

@@ -43,7 +43,7 @@ import Flash from '@/components/Flash.vue'
 import { PostType } from "@/types"
 
 export default defineComponent({
-  name: 'EditPost',
+  name: 'ShowPost',
   props: {
     csrfToken: String,
     post: Object as PropType<PostType>

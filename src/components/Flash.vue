@@ -1,5 +1,5 @@
 <template>
-  <b-alert v-for="item in messages" :variant="variant" show>{{ item }}</b-alert>
+  <b-alert v-for="(item, index) in messages" :variant="variant" :key="index" show>{{ item }}</b-alert>
 </template>
 
 <script lang="ts">

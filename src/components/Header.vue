@@ -70,13 +70,13 @@ export default defineComponent({
   },
   props: {
     user: {
-      default() {
-        return {
-          username: 'John',
-          avatar: 'https://i.pravatar.cc/100',
-        }
-      },
-      // default: null,
+      // default() {
+      //   return {
+      //     username: 'John',
+      //     avatar: 'https://i.pravatar.cc/100',
+      //   }
+      // },
+      default: null,
       type: Object as PropType<UserType>,
     },
     csrfToken: {

@@ -6,6 +6,35 @@
   <router-view />
 </template>
 
+<script lang="ts">
+import { defineComponent, onMounted, inject } from "vue"
+import { useStore } from 'vuex'
+
+export default defineComponent({
+  name: "App",
+  setup(props, context) {
+    const axios: any = inject('axios')
+    const store = useStore()
+    onMounted(async () => {
+      console.log(store.state.auth)
+
+      try {
+
+        const response = await axios.post('http://localhost:3000', {
+          username: 'test',
+          password: 'testtesttest'
+        })
+
+        console.log('response', response)
+
+      } catch (e) {
+        console.log(e)
+      }
+    })
+  }
+});
+</script>
+
 <style>
 html, body {
   min-height: 100%;

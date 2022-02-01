@@ -20,7 +20,7 @@ export default defineComponent({
 
       try {
 
-        const response = await axios.post('http://localhost:3000', {
+        const response = await axios.post('http://localhost:3000/api/login', {
           username: 'test',
           password: 'testtesttest'
         })

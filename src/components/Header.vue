@@ -21,7 +21,6 @@
         </a>
         <b-button class="btn-success mr-2" variant="link" size="sm">Create Post</b-button>
         <form action="/logout" method="POST" class="d-inline">
-          <input type="hidden" name="_csrf" :value="csrfToken">
           <b-button size="sm">Sign Out</b-button>
         </form>
       </div>
@@ -44,11 +43,6 @@
               placeholder="Password"
             />
           </div>
-          <input
-            type="hidden"
-            name="_csrf"
-            :value="csrfToken"
-          />
           <div class="col-md-auto">
             <b-button variant="primary" size="sm">Sign In</b-button>
           </div>
@@ -78,9 +72,6 @@ export default defineComponent({
       // },
       default: null,
       type: Object as PropType<UserType>,
-    },
-    csrfToken: {
-      default: 'somevalue'
     }
   },
 });

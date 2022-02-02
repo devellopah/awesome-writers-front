@@ -9,11 +9,9 @@
     <span id="username">{{ username }}</span>
     <div v-if="user && user.username !== username">
       <form class="ml-2 d-inline" action="/unfollow/{{ username }}" method="POST" v-if="isFollowing">
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <button class="btn btn-danger btn-sm">Unfollow <i class="fas fa-user-times"></i></button>
       </form>
       <form class="ml-2 d-inline" action="/follow/{{ username }}" method="POST" v-else>
-        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
       </form>
     </div>
@@ -41,7 +39,6 @@ import { UserType } from "@/types"
 export default defineComponent({
   name: 'ShowUser',
   props: {
-    csrfToken: String,
     user: Object as PropType<UserType>,
     avatar: String,
     username: String,

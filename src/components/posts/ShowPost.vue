@@ -12,7 +12,6 @@
           <font-awesome-icon icon="edit" />
         </a>
         <b-form class="delete-post-form d-inline" action="/posts/{{ post._id }}?_method=DELETE" method="POST">
-          <input type="hidden" name="_csrf" value="{{ csrfToken }}">
           <button class="delete-post-button text-danger" data-toggle="tooltip" data-placement="top" title="Delete">
           <font-awesome-icon icon="trash" />
           </button>
@@ -45,7 +44,6 @@ import { PostType } from "@/types"
 export default defineComponent({
   name: 'ShowPost',
   props: {
-    csrfToken: String,
     post: Object as PropType<PostType>
   },
   components: {

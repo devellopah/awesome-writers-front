@@ -55,8 +55,6 @@
             placeholder="Create a password"
           />
         </b-form-group>
-
-        <input type="hidden" name="_csrf" :value="csrfToken">
         <b-button
           block
           type="submit"
@@ -78,8 +76,6 @@ export default defineComponent({
   name: 'Guest',
   props: {
     errors: Array as PropType<Array<string>>,
-    csrfToken: String,
-
   },
 })
 </script>

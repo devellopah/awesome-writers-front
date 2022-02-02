@@ -39,7 +39,6 @@
           :value="post!.body"
         />
       </b-form-group>
-    <input type="hidden" name="_csrf" :value="csrfToken">
     <b-button
       variant="primary"
     >
@@ -61,7 +60,6 @@ import { PostType } from "@/types"
 export default defineComponent({
   name: 'EditPost',
   props: {
-    csrfToken: String,
     post: Object as PropType<PostType>
   },
   components: {

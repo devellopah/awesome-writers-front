@@ -32,7 +32,6 @@
           name="body"
         />
       </b-form-group>
-      <input type="hidden" name="_csrf" :value="csrfToken">
       <b-button
         variant="primary"
       >
@@ -51,10 +50,6 @@ import Flash from '@/components/Flash.vue'
 
 export default defineComponent({
   name: 'CreatePost',
-  props: {
-    csrfToken: String,
-
-  },
   components: {
     Header,
     Footer,

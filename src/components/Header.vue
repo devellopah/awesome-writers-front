@@ -24,7 +24,7 @@
           <b-button size="sm">Sign Out</b-button>
         </form>
       </div>
-      <b-form action="/login" method="POST" class="mb-0 pt-2 pt-md-0" v-else>
+      <b-form @submit.prevent="onSubmit" class="mb-0 pt-2 pt-md-0" v-else>
         <div class="row align-items-center">
           <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
             <b-form-input
@@ -33,6 +33,7 @@
               type="text"
               placeholder="Username"
               autocomplete="off"
+              v-model="username"
             />
           </div>
           <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
@@ -41,10 +42,11 @@
               class="form-control form-control-sm input-dark"
               type="password"
               placeholder="Password"
+              v-model="password"
             />
           </div>
           <div class="col-md-auto">
-            <b-button variant="primary" size="sm">Sign In</b-button>
+            <b-button type="submit" variant="primary" size="sm">Sign In</b-button>
           </div>
         </div>
       </b-form>
@@ -55,7 +57,8 @@
 
 <script lang="ts">
 
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, onMounted, ref } from "vue";
+import { useStore } from 'vuex'
 import { UserType } from "@/types";
 
 export default defineComponent({
@@ -74,5 +77,30 @@ export default defineComponent({
       type: Object as PropType<UserType>,
     }
   },
+  setup() {
+    const store = useStore()
+    const username = ref('')
+    const password = ref('')
+
+    const onSubmit = () => {
+      console.log(username.value)
+      console.log(password.value)
+    }
+    onMounted(async () => {
+      console.log(store.state.auth)
+
+
+      // store.dispatch('auth/login', {
+      //   username,
+      //   password,
+      // })
+    })
+
+    return {
+      username,
+      password,
+      onSubmit
+    }
+  }
 });
 </script>

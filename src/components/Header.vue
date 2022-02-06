@@ -83,17 +83,13 @@ export default defineComponent({
     const password = ref('')
 
     const onSubmit = () => {
-      console.log(username.value)
-      console.log(password.value)
+      store.dispatch('auth/login', {
+        username: username.value,
+        password: password.value,
+      })
     }
     onMounted(async () => {
       console.log(store.state.auth)
-
-
-      // store.dispatch('auth/login', {
-      //   username,
-      //   password,
-      // })
     })
 
     return {

@@ -1,10 +1,18 @@
 import axios from "axios"
-type AuthToken = null | string
-type AuthError = null | string
+
+export interface UserType {
+  username: string,
+  avatar: string,
+  email: string,
+}
 export interface AuthState {
-  isAuth: boolean,
-  token: AuthToken,
-  error: AuthError,
+  user: UserType | null,
+  token: string | null,
+  error: string | null,
+}
+export interface LoginPayload {
+  token: string,
+  user: UserType
 }
 
 export interface Credentials {
@@ -15,23 +23,25 @@ export interface Credentials {
 const auth = {
   namespaced: true,
   state: () : AuthState => ({
-    isAuth: false,
+    user: null,
     token: null,
     error: null,
   }),
   mutations: {
-    loginSuccessed(state: AuthState, token: AuthToken) {
-      state.token = token
-      state.isAuth = true
+    loginSuccessed(state: AuthState, payload: LoginPayload) {
+      state.token = payload.token
+      state.user = payload.user
       state.error = null
-      localStorage.setItem('token', JSON.stringify(token))
+      localStorage.setItem('token', JSON.stringify(payload.token))
     },
-    loginFailed(state: AuthState, error: AuthError) {
+    loginFailed(state: AuthState, error: string) {
+      state.token = null
+      state.user = null
       state.error  = error
     },
     logout(state: AuthState) {
       state.token = null
-      state.isAuth = false
+      state.user = null
       state.error = null
       localStorage.removeItem('token')
     },

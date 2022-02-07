@@ -10,12 +10,12 @@ export interface AuthState {
   token: string | null,
   error: string | null,
 }
-export interface LoginPayload {
+export interface LoginResponsePayload {
   token: string,
   user: UserType
 }
 
-export interface Credentials {
+export interface LoginRequestPayload {
   username: string,
   password: string
 }
@@ -28,7 +28,7 @@ const auth = {
     error: null,
   }),
   mutations: {
-    loginSuccessed(state: AuthState, payload: LoginPayload) {
+    loginSuccessed(state: AuthState, payload: LoginResponsePayload) {
       state.token = payload.token
       state.user = payload.user
       state.error = null
@@ -47,7 +47,7 @@ const auth = {
     },
   },
   actions: {
-    async login({ commit }: { commit: any }, { username, password }: Credentials) {
+    async login({ commit }: { commit: any }, { username, password }: LoginRequestPayload) {
       try {
         const endpoint = 'http://localhost:3000/api/login'
         const response = await axios.post(endpoint, { username, password })
@@ -59,7 +59,11 @@ const auth = {
       }
     }
   },
-  getters: {}
+  getters: {
+    isAuth(state: AuthState) {
+      return Boolean(state.user)
+    }
+  }
 }
 
 export default auth

@@ -4,7 +4,7 @@
       <h4 class="my-0 mr-md-auto font-weight-normal">
         <a href="/" class="text-white">OurApp</a>
       </h4>
-      <div class="flex-row my-3 my-md-0" v-if="user">
+      <div class="flex-row my-3 my-md-0" v-if="isAuth">
         <a href="#" class="text-white mr-2 header-search-icon" title="Search" data-toggle="tooltip" data-placement="bottom">
           <font-awesome-icon icon="search" />
         </a>
@@ -57,7 +57,7 @@
 
 <script lang="ts">
 
-import { defineComponent, PropType, onMounted, ref } from "vue";
+import { defineComponent, PropType, onMounted, ref, computed } from "vue";
 import { useStore } from 'vuex'
 import { UserType } from "@/types";
 
@@ -66,16 +66,16 @@ export default defineComponent({
   components: {
   },
   props: {
-    user: {
+    // user: {
       // default() {
       //   return {
       //     username: 'John',
       //     avatar: 'https://i.pravatar.cc/100',
       //   }
       // },
-      default: null,
-      type: Object as PropType<UserType>,
-    }
+      // default: null,
+      // type: Object as PropType<UserType>,
+    // }
   },
   setup() {
     const store = useStore()
@@ -88,6 +88,8 @@ export default defineComponent({
         password: password.value,
       })
     }
+    const isAuth = computed(() => store.getters['auth/isAuth'])
+    const user  = computed(() => store.state.auth.user)
     onMounted(async () => {
       console.log(store.state.auth)
     })
@@ -95,7 +97,9 @@ export default defineComponent({
     return {
       username,
       password,
-      onSubmit
+      onSubmit,
+      isAuth,
+      user,
     }
   }
 });

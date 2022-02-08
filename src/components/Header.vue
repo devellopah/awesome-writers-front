@@ -20,11 +20,11 @@
           >
         </a>
         <b-button class="btn-success mr-2" variant="link" size="sm">Create Post</b-button>
-        <form action="/logout" method="POST" class="d-inline">
-          <b-button size="sm">Sign Out</b-button>
+        <form @submit.prevent="onLogout" class="d-inline">
+          <b-button type="submit" size="sm">Sign Out</b-button>
         </form>
       </div>
-      <b-form @submit.prevent="onSubmit" class="mb-0 pt-2 pt-md-0" v-else>
+      <b-form @submit.prevent="onLogin" class="mb-0 pt-2 pt-md-0" v-else>
         <div class="row align-items-center">
           <div class="col-md mr-0 pr-md-0 mb-3 mb-md-0">
             <b-form-input
@@ -59,35 +59,25 @@
 
 import { defineComponent, PropType, onMounted, ref, computed } from "vue";
 import { useStore } from 'vuex'
-import { UserType } from "@/types";
 
 export default defineComponent({
   name: "Header",
-  components: {
-  },
-  props: {
-    // user: {
-      // default() {
-      //   return {
-      //     username: 'John',
-      //     avatar: 'https://i.pravatar.cc/100',
-      //   }
-      // },
-      // default: null,
-      // type: Object as PropType<UserType>,
-    // }
-  },
   setup() {
     const store = useStore()
     const username = ref('')
     const password = ref('')
 
-    const onSubmit = () => {
+    const onLogin = () => {
       store.dispatch('auth/login', {
         username: username.value,
         password: password.value,
       })
     }
+
+    const onLogout = () => {
+      store.commit('auth/logout')
+    }
+
     const isAuth = computed(() => store.getters['auth/isAuth'])
     const user  = computed(() => store.state.auth.user)
     onMounted(async () => {
@@ -97,7 +87,8 @@ export default defineComponent({
     return {
       username,
       password,
-      onSubmit,
+      onLogin,
+      onLogout,
       isAuth,
       user,
     }

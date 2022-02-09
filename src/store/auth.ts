@@ -33,6 +33,8 @@ const auth = {
       state.user = payload.user
       state.error = null
       localStorage.setItem('aw_token', JSON.stringify(payload.token))
+      localStorage.setItem('aw_user', JSON.stringify(payload.user))
+
     },
     loginFailed(state: AuthState, error: string) {
       state.token = null
@@ -44,6 +46,7 @@ const auth = {
       state.user = null
       state.error = null
       localStorage.removeItem('aw_token')
+      localStorage.removeItem('aw_user')
     },
   },
   actions: {

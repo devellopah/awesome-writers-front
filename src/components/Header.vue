@@ -57,7 +57,7 @@
 
 <script lang="ts">
 
-import { defineComponent, PropType, onMounted, ref, computed } from "vue";
+import { defineComponent, onMounted, ref, computed } from "vue";
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -80,7 +80,7 @@ export default defineComponent({
 
     const isAuth = computed(() => store.getters['auth/isAuth'])
     const user  = computed(() => store.state.auth.user)
-    onMounted(async () => {
+    onMounted(() => {
       console.log(store.state.auth)
     })
 

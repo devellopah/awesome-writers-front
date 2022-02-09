@@ -7,10 +7,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent, onMounted } from "vue"
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: "App",
+  setup() {
+    const store = useStore()
+    onMounted(() => {
+        console.log('onMounted App.js')
+
+      const token = localStorage.getItem('aw_token')
+      const user = localStorage.getItem('aw_user')
+
+
+      if(token && user) {
+        const payload = {
+          token: JSON.parse(token),
+          user: JSON.parse(user)
+        }
+        console.log('payload', payload)
+        store.commit('auth/loginSuccessed', payload)
+      }
+    })
+
+    return {}
+  }
 });
 </script>
 

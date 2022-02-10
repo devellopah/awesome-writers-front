@@ -47,6 +47,12 @@ body {
   flex-direction: column;
 }
 
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 header + div {
   flex-grow: 1;
 }

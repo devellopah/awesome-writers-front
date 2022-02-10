@@ -8,7 +8,7 @@
         <span class="text-muted small">on {{ post.created_at.getMonth() + 1 }} {{ post.created_at.getDate() }} {{ post.created_at.getFullYear() }}</span>
       </a>
   </div>
-  <div class="text-center" v-if="user">
+  <div class="text-center">
     <h2>Hello <strong>{{ user.username }}</strong>, your feed is empty.</h2>
     <p class="lead text-muted">Your feed displays the latest posts from the
       people you follow. If you don&rsquo;t have any friends to follow
@@ -19,15 +19,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue"
-import { UserType, PostType } from "@/types"
+import { defineComponent, PropType, computed } from "vue"
+import { PostType } from "@/types"
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: "Dashboard",
   props: {
-    // user: Object as PropType<UserType>,
-    user: null,
     posts: Array as PropType<Array<PostType>>
   },
+  setup() {
+    const store = useStore()
+    const user  = computed(() => store.state.auth.user)
+
+    return {
+      user
+    }
+  }
 });
 </script>

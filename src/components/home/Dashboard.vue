@@ -1,6 +1,6 @@
 <template>
-  <h2 class="text-center mb-4" v-if="posts">Latest from those you follow</h2>
-  <div class="list-group" v-if="posts">
+  <h2 class="text-center mb-4" v-if="hasFeed">Latest from those you follow</h2>
+  <div class="list-group" v-if="hasFeed">
       <a v-for="(post, index) in posts" :href="'/posts/{{ post._id }}'" :key="index" class="list-group-item list-group-item-action">
         <img class="avatar-tiny" :src="post.author.avatar">
         <strong>{{ post.title }}</strong>
@@ -8,7 +8,7 @@
         <span class="text-muted small">on {{ post.created_at.getMonth() + 1 }} {{ post.created_at.getDate() }} {{ post.created_at.getFullYear() }}</span>
       </a>
   </div>
-  <div class="text-center">
+  <div class="text-center" v-else>
     <h2>Hello <strong>{{ user.username }}</strong>, your feed is empty.</h2>
     <p class="lead text-muted">Your feed displays the latest posts from the
       people you follow. If you don&rsquo;t have any friends to follow
@@ -19,21 +19,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from "vue"
-import { PostType } from "@/types"
+import { defineComponent, computed, onMounted } from "vue"
 import { useStore } from 'vuex'
 
 export default defineComponent({
   name: "Dashboard",
-  props: {
-    posts: Array as PropType<Array<PostType>>
-  },
   setup() {
     const store = useStore()
     const user  = computed(() => store.state.auth.user)
+    const posts = computed(() => store.state.posts.feed)
+    const hasFeed = computed(() => store.getters['posts/hasFeed'])
+
+    onMounted(() => {
+      store.dispatch('posts/getFeed', {
+        _id: user.value._id
+      })
+    })
 
     return {
-      user
+      user,
+      posts,
+      hasFeed,
     }
   }
 });

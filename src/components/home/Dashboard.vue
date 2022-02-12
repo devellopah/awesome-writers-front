@@ -31,6 +31,7 @@ export default defineComponent({
     const hasFeed = computed(() => store.getters['posts/hasFeed'])
 
     onMounted(() => {
+      console.log('user', user.value)
       store.dispatch('posts/getFeed', {
         _id: user.value._id
       })

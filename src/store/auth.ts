@@ -1,6 +1,7 @@
 import axios from "axios"
 
 export interface UserType {
+  _id: string,
   username: string,
   avatar: string,
   email: string,

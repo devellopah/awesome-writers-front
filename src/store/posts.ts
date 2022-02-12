@@ -43,10 +43,10 @@ const posts = {
     async getFeed({ commit }: { commit: any }, { _id }: FeedRequestPayload) {
       try {
         const endpoint = 'http://localhost:3000/api/feed'
+        const token = JSON.parse(localStorage.getItem('aw_token')!)
         const response = await axios.get(endpoint, {
-          params: {
-            _id,
-          }
+          params: { _id },
+          headers: { "Authorization": `Bearer ${token}` },
         })
         commit('feedRequestSuccessed', response.data)
         console.log('feed response', response)

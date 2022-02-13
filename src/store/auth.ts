@@ -53,8 +53,8 @@ const auth = {
   actions: {
     async login({ commit }: { commit: any }, { username, password }: LoginRequestPayload) {
       try {
-        const endpoint = 'http://localhost:3000/api/login'
-        const response = await axios.post(endpoint, { username, password })
+        const response = await axios.post('/login', { username, password })
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
         commit('loginSuccessed', response.data)
         console.log('response', response)
 

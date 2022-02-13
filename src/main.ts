@@ -17,6 +17,8 @@ import store from "./store";
 
 library.add(faSearch, faComment)
 
+axios.defaults.baseURL = 'http://localhost:3000/api'
+
 const app = createApp(App)
 app
   .component('font-awesome-icon', FontAwesomeIcon)

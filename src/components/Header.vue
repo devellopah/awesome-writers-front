@@ -11,17 +11,17 @@
         <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip" data-placement="bottom">
           <font-awesome-icon icon="comment" />
         </span>
-        <a :href="'/users/{{ user.username }}'" class="mr-2">
+        <a :href="'/users/' + loggedInUserName" class="mr-2">
           <img
             title="My Profile" data-toggle="tooltip"
             data-placement="bottom"
             style="width: 32px; height: 32px; border-radius: 16px;"
-            :src="user.avatar"
+            :src="loggedInUserAvatar"
           >
         </a>
         <b-button class="btn-success mr-2" variant="link" size="sm">Create Post</b-button>
         <form @submit.prevent="onLogout" class="d-inline">
-          <b-button type="submit" size="sm">Sign Out</b-button>
+          <b-button type="submit" size="sm">Sign Out({{loggedInUserName}})</b-button>
         </form>
       </div>
       <b-form @submit.prevent="onLogin" class="mb-0 pt-2 pt-md-0" v-else>
@@ -57,7 +57,7 @@
 
 <script lang="ts">
 
-import { defineComponent, onMounted, ref, computed } from "vue";
+import { defineComponent, onMounted, ref, computed, toRef } from "vue";
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -79,9 +79,14 @@ export default defineComponent({
     }
 
     const isAuth = computed(() => store.getters['auth/isAuth'])
-    const user  = computed(() => store.state.auth.user)
+    // const user  = computed(() => store.state.auth.user)
+
+    const loggedInUserName = toRef(store.state.auth.user, 'username')
+    const loggedInUserAvatar = toRef(store.state.auth.user, 'avatar')
+
+
     onMounted(() => {
-      console.log(store.state.auth)
+      // console.log('user', user)
     })
 
     return {
@@ -90,7 +95,8 @@ export default defineComponent({
       onLogin,
       onLogout,
       isAuth,
-      user,
+      loggedInUserName,
+      loggedInUserAvatar,
     }
   }
 });

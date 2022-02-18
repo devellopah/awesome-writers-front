@@ -42,10 +42,8 @@ const posts = {
   actions: {
     async getFeed({ commit }: { commit: any }, { _id }: FeedRequestPayload) {
       try {
-        const token = JSON.parse(localStorage.getItem('aw_token')!)
         const response = await axios.get('/feed', {
           params: { _id },
-          // headers: { "Authorization": `Bearer ${token}` },
         })
         commit('feedRequestSuccessed', response.data)
         console.log('feed response', response)

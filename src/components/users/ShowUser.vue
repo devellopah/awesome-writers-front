@@ -1,8 +1,5 @@
 <template>
-<Header />
-
 <div class="container py-md-5 container--narrow">
-
   <Flash />
   <h2>
     <img class="avatar-small" src="{{ avatar }}">
@@ -25,14 +22,10 @@
 
   <div id="profileContent"></div>
 </div>
-
-<Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue"
-import Header from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
 import Flash from '@/components/Flash.vue'
 import { UserType } from "@/types"
 
@@ -48,8 +41,6 @@ export default defineComponent({
     followingCount: String,
   },
   components: {
-    Header,
-    Footer,
     Flash,
   }
 })

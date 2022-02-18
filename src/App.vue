@@ -1,17 +1,21 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
+  <Header />
   <router-view />
+  <Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted } from "vue"
 import { useStore } from 'vuex'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 
 export default defineComponent({
   name: "App",
+  components: {
+    Header,
+    Footer,
+  },
   setup() {
     const store = useStore()
     onMounted(() => {

@@ -1,6 +1,4 @@
 <template>
-<Header />
-
 <div class="container py-md-5 container--narrow">
 
   <Flash />
@@ -30,14 +28,10 @@
       <p>{{ post!.body }}</p>
     </div>
 </div>
-
-<Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue"
-import Header from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
 import Flash from '@/components/Flash.vue'
 import { PostType } from "@/types"
 
@@ -47,8 +41,6 @@ export default defineComponent({
     post: Object as PropType<PostType>
   },
   components: {
-    Header,
-    Footer,
     Flash,
   }
 })

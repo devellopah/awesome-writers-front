@@ -9,12 +9,12 @@ interface Profile {
   followingCount: number
 }
 interface State {
-  profile: Profile | null,
+  data: Profile | null,
   error: string | null
 }
 
 export interface ProfileResponsePayload {
-  profile: Profile
+  data: Profile
 }
 
 export interface ProfileRequestPayload {
@@ -24,23 +24,16 @@ export interface ProfileRequestPayload {
 const profile = {
   namespaced: true,
   state: (): State => ({
-    profile: {
-      username: '',
-      avatar: '',
-      isFollowing: false,
-      postsCount: 0,
-      followersCount: 0,
-      followingCount: 0,
-    },
+    data: null,
     error: null,
   }),
   mutations: {
     profileRequestSuccessed(state: State, payload: ProfileResponsePayload) {
-      state.profile = payload.profile
+      state.data = payload.data
       state.error = null
     },
     profileRequestFailed(state: State, error: string) {
-      state.profile = null
+      state.data = null
       state.error = error
     },
   },

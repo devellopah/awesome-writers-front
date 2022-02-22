@@ -28,8 +28,8 @@ const profile = {
     error: null,
   }),
   mutations: {
-    profileRequestSuccessed(state: State, payload: ProfileResponsePayload) {
-      state.data = payload.data
+    profileRequestSuccessed(state: State, payload: Profile) {
+      state.data = payload
       state.error = null
     },
     profileRequestFailed(state: State, error: string) {
@@ -43,8 +43,8 @@ const profile = {
         const response = await axios.get(`/users/${username}`)
         commit('profileRequestSuccessed', response.data)
         console.log('profile response', response)
-      } catch (e) {
-        commit('profileRequestFailed', e)
+      } catch (e: any) {
+        commit('profileRequestFailed', e.message)
       }
     }
   },

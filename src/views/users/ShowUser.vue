@@ -2,7 +2,7 @@
 <div class="container py-md-5 container--narrow">
   <div v-if="profile">
     <h2>
-      <img class="avatar-small" src="{{ profie.avatar }}">
+      <img class="avatar-small" :src="profile.avatar">
       <span id="username">{{ profile.username }}</span>
       <div v-if="user.username !== profile.username">
         <form class="ml-2 d-inline" action="/unfollow/{{ username }}" method="POST" v-if="profile.isFollowing">
@@ -23,7 +23,9 @@
     <div id="profileContent"></div>
   </div>
 
-  <Flash v-else />
+  <Flash v-else-if="error" :message="error" />
+
+  <div v-else>Loading...</div>
 </div>
 </template>
 
@@ -44,6 +46,7 @@ export default defineComponent({
     const store = useStore()
 
     const profile  = computed(() => store.state.profile.data)
+    const error  = computed(() => store.state.profile.error)
     const user  = computed(() => store.state.auth.user)
     onMounted(() => {
       store.dispatch('profile/getProfile', {
@@ -54,6 +57,7 @@ export default defineComponent({
     return {
       profile,
       user,
+      error,
     }
   },
 })

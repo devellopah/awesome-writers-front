@@ -5,19 +5,19 @@
       <img class="avatar-small" :src="profile.avatar">
       <span id="username">{{ profile.username }}</span>
       <div v-if="user.username !== profile.username">
-        <form class="ml-2 d-inline" action="/unfollow/{{ username }}" method="POST" v-if="profile.isFollowing">
+        <form class="ml-2 d-inline" :action="'/unfollow/' + profile.username" method="POST" v-if="profile.isFollowing">
           <button class="btn btn-danger btn-sm">Unfollow <i class="fas fa-user-times"></i></button>
         </form>
-        <form class="ml-2 d-inline" action="/follow/{{ username }}" method="POST" v-else>
+        <form class="ml-2 d-inline" :action="'/follow/' + profile.username" method="POST" v-else>
           <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
         </form>
       </div>
     </h2>
 
     <div class="profile-nav nav nav-tabs pt-2 mb-4">
-      <a href="#" class="profile-nav-link nav-item nav-link active" data-resource="posts" data-url="/users/{{ username }}/posts">Posts: <span id="postsCount">{{ profile.postsCount }}</span></a>
-      <a href="#" class="profile-nav-link nav-item nav-link" data-resource="followers" data-url="/users/{{ username }}/followers">Followers: <span id="followersCount">{{ profile.followersCount }}</span></a>
-      <a href="#" class="profile-nav-link nav-item nav-link" data-resource="following" data-url="/users/{{ username }}/following">Following: <span id="followingCount">{{ profile.followingCount }}</span></a>
+      <a href="#" class="profile-nav-link nav-item nav-link active" data-resource="posts" :data-url="'/users/' + profile.username + '/posts'">Posts: <span id="postsCount">{{ profile.postsCount }}</span></a>
+      <a href="#" class="profile-nav-link nav-item nav-link" data-resource="followers" :data-url="'/users/' + profile.username + '/followers'">Followers: <span id="followersCount">{{ profile.followersCount }}</span></a>
+      <a href="#" class="profile-nav-link nav-item nav-link" data-resource="following" :data-url="'/users/' + profile.username + '/following'">Following: <span id="followingCount">{{ profile.followingCount }}</span></a>
     </div>
 
     <div id="profileContent"></div>
@@ -30,9 +30,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, computed } from "vue"
+import { defineComponent, onMounted, computed } from "vue"
 import Flash from '@/components/Flash.vue'
-import { UserType } from "@/types"
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 

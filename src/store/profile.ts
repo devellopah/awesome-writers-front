@@ -19,6 +19,7 @@ export interface ProfileResponsePayload {
 
 export interface ProfileRequestPayload {
   username: string,
+  visitorId: string | null,
 }
 
 const profile = {
@@ -38,9 +39,11 @@ const profile = {
     },
   },
   actions: {
-    async getProfile({ commit }: { commit: any }, { username }: ProfileRequestPayload) {
+    async getProfile({ commit }: { commit: any }, { username, visitorId }: ProfileRequestPayload) {
       try {
-        const response = await axios.get(`/users/${username}`)
+        const response = await axios.get(`/users/${username}`, {
+          params: { visitorId }
+        })
         commit('profileRequestSuccessed', response.data)
         console.log('profile response', response)
       } catch (e: any) {

@@ -11,14 +11,14 @@
         <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip" data-placement="bottom">
           <font-awesome-icon icon="comment" />
         </span>
-        <a :href="'/users/' + user.username" class="mr-2">
+        <router-link :to="'/users/' + user.username" class="mr-2">
           <img
             title="My Profile" data-toggle="tooltip"
             data-placement="bottom"
             style="width: 32px; height: 32px; border-radius: 16px;"
             :src="user.avatar"
           >
-        </a>
+        </router-link>
         <b-button class="btn-success mr-2" variant="link" size="sm">Create Post</b-button>
         <form @submit.prevent="onLogout" class="d-inline">
           <b-button type="submit" size="sm">Sign Out({{user.username}})</b-button>

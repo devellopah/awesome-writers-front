@@ -49,7 +49,8 @@ export default defineComponent({
     const user  = computed(() => store.state.auth.user)
     onMounted(() => {
       store.dispatch('profile/getProfile', {
-        username: route.params.username
+        username: route.params.username,
+        visitorId: user.value ? user.value._id : null
       })
     })
 

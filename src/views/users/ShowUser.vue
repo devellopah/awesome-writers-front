@@ -5,11 +5,11 @@
       <img class="avatar-small" :src="profile.avatar">
       <span id="username">{{ profile.username }}</span>
       <div v-if="user.username !== profile.username">
-        <form class="ml-2 d-inline" :action="'/unfollow/' + profile.username" method="POST" v-if="profile.isFollowing">
-          <button class="btn btn-danger btn-sm">Unfollow <i class="fas fa-user-times"></i></button>
+        <form @submit.prevent="onUnFollowSubmit" class="ml-2 d-inline" v-if="profile.isFollowing">
+          <button type="submit" class="btn btn-danger btn-sm">Unfollow <i class="fas fa-user-times"></i></button>
         </form>
-        <form class="ml-2 d-inline" :action="'/follow/' + profile.username" method="POST" v-else>
-          <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
+        <form @submit.prevent="onFollowSubmit" class="ml-2 d-inline" v-else>
+          <button type="submit" class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
         </form>
       </div>
     </h2>
@@ -54,10 +54,26 @@ export default defineComponent({
       })
     })
 
+    const onFollowSubmit = () => {
+      store.dispatch('profile/follow', {
+        username: route.params.username,
+        visitorId: user.value ? user.value._id : null
+      })
+    }
+
+    const onUnFollowSubmit = () => {
+      store.dispatch('profile/unfollow', {
+        username: route.params.username,
+        visitorId: user.value ? user.value._id : null
+      })
+    }
+
     return {
       profile,
       user,
       error,
+      onFollowSubmit,
+      onUnFollowSubmit
     }
   },
 })

@@ -71,7 +71,7 @@ const profile = {
         commit('profileRequestSuccessed', response.data)
         console.log('profile response', response)
       } catch (e: any) {
-        commit('profileRequestFailed', e.message)
+        commit('profileRequestFailed', e.response.data)
       }
     },
     async follow({ commit }: { commit: any }, { username, visitorId }: FollowRequestPayload) {
@@ -80,8 +80,10 @@ const profile = {
         commit('followRequestSuccessed', response.data)
         console.log('response', response)
       } catch (e: any) {
-        console.log('follow errors', e)
-        commit('followRequestFailed', e)
+        console.dir(e.response)
+        e.response.status === 403
+          ? commit('profileRequestFailed', e.response.data)
+          : commit('followRequestFailed', e.response.data)
       }
     },
     async unfollow({ commit }: { commit: any }, { username, visitorId }: FollowRequestPayload) {
@@ -91,7 +93,7 @@ const profile = {
         console.log('response', response)
       } catch (e: any) {
         console.log('follow errors', e)
-        commit('followRequestFailed', e)
+        commit('followRequestFailed', e.response.data)
       }
     },
   },

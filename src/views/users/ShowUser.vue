@@ -1,5 +1,9 @@
 <template>
 <div class="container py-md-5 container--narrow">
+  <Flash v-if="error" :message="error" :variant="'danger'" />
+  <Flash v-if="follow.message" :message="follow.message" :variant="'success'" />
+  <Flash v-if="follow.errors.length" :messages="follow.errors" :variant="'danger'" />
+
   <div v-if="profile">
     <h2>
       <img class="avatar-small" :src="profile.avatar">
@@ -22,9 +26,6 @@
 
     <div id="profileContent"></div>
   </div>
-
-  <Flash v-else-if="error" :message="error" />
-
   <div v-else>Loading...</div>
 </div>
 </template>
@@ -45,6 +46,7 @@ export default defineComponent({
     const store = useStore()
 
     const profile  = computed(() => store.state.profile.data)
+    const follow  = computed(() => store.state.profile.follow)
     const error  = computed(() => store.state.profile.error)
     const user  = computed(() => store.state.auth.user)
     onMounted(() => {
@@ -71,6 +73,7 @@ export default defineComponent({
     return {
       profile,
       user,
+      follow,
       error,
       onFollowSubmit,
       onUnFollowSubmit
